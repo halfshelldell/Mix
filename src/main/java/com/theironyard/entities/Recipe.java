@@ -27,17 +27,33 @@ public class Recipe {
     @Column (nullable = false)
     String skill;
 
+    @Column
+    String fileName;
+
     @ManyToOne
     User user;
 
     public Recipe() {
     }
 
-    public Recipe(String recipeName, int time, String instructions, String ingredients, User user) {
+    public Recipe(String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user) {
         this.recipeName = recipeName;
         this.time = time;
         this.instructions = instructions;
         this.ingredients = ingredients;
+        this.skill = skill;
+        this.fileName = fileName;
+        this.user = user;
+    }
+
+    public Recipe(int id, String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user) {
+        this.id = id;
+        this.recipeName = recipeName;
+        this.time = time;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
+        this.skill = skill;
+        this.fileName = fileName;
         this.user = user;
     }
 
@@ -59,6 +75,22 @@ public class Recipe {
 
     public int getTime() {
         return time;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void setTime(int time) {
