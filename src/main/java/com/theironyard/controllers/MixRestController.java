@@ -46,20 +46,18 @@ public class MixRestController {
             throw new Exception("Not logged in!");
         }
 
-        User user = userRepo.findByUserName(username);
+        User user = userRepo.findByUsername(username);
         if (user == null) {
             throw new Exception("User not in database!");
         }
 
        return recipeRepo.findAll();
 
-
-
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody User user) throws Exception {
-        User userFromDb = userRepo.findByUserName(user.getUsername());
+        User userFromDb = userRepo.findByUsername(user.getUsername());
         if (userFromDb == null) {
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
             userRepo.save(user);

@@ -27,6 +27,9 @@ public class Recipe {
     @Column (nullable = false)
     String skill;
 
+    @Column (nullable = false)
+    int votes;
+
     @Column
     String fileName;
 

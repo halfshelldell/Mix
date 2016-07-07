@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by johncrooks on 7/7/16.
  */
 @Entity
-@Table(name="recipes")
+@Table(name="favs")
 public class Fav {
     @Id
     @GeneratedValue
