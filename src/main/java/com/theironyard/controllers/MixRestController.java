@@ -100,4 +100,19 @@ public class MixRestController {
         recipeRepo.save(recipe);
     }
 
+    @RequestMapping(path = "get-mine", method = RequestMethod.GET)
+    public Iterable<Recipe> getMyRecipes(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return recipeRepo.findByUser(user);
+    }
+
 }
