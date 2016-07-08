@@ -96,7 +96,7 @@ public class MixRestController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
-        Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, uploadedFile.getName(), user);
+        Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
     }
 
