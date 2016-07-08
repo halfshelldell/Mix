@@ -1,3 +1,60 @@
 header{
-  background-image: url("templates/mixlogo.png");
+  width: 100%;
+  height: 250px;
+  border: 2px black solid;
+background-repeat: no-repeat;
+background-color: #FCFBE3;
+}
+.topCatagory{
+  width: 100%;
+  height: 1000px;
+  border: 2px black solid;
+}
+.andMatch{
+  width: 100%;
+  height: 1000px;
+  border: 2px black solid;
+}
+.andMatch{
+  width: 90%;
+ height: 75px;
+border: 2px solid blue;
+font-family: 'Amatic SC', cursive;
+display: inline-block;
+margin-left: 2.6%;
+}
+.chef1 {
+  width: 30%;
+  border: 2px red solid;
+  float: left;
+  height: 400px;
+  display: inline-block;
+  margin-left: 35px;
+}
+.chef2 {
+  width: 30%;
+  border: 2px red solid;
+  float: left;
+  height: 400px;
+  display: inline-block;
+}
+.chef3 {
+  width: 30%;
+  border: 2px red solid;
+  float: left;
+  height: 400px;
+  display: inline-block;
+}
+.topNav{
+  width: 100%;
+ height: 75px;
+border: 2px solid brown;
+}
+.navbarnavbar-inverse{
+  background-color: #626A70;
+}
+.menuText{
+  color: white;
+  font-family: 'Amatic SC', cursive;
+  font-size: 30px;
 }
