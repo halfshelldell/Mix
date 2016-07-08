@@ -30,6 +30,9 @@ public class Recipe {
     @Column (nullable = false)
     int votes;
 
+    @Column (nullable = false)
+    String category;
+
     @Column
     String fileName;
 
@@ -39,23 +42,27 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user) {
+    public Recipe(String recipeName, int time, String instructions, String ingredients, String skill, int votes, String category, String fileName, User user) {
         this.recipeName = recipeName;
         this.time = time;
         this.instructions = instructions;
         this.ingredients = ingredients;
         this.skill = skill;
+        this.votes = votes;
+        this.category = category;
         this.fileName = fileName;
         this.user = user;
     }
 
-    public Recipe(int id, String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user) {
+    public Recipe(int id, String recipeName, int time, String instructions, String ingredients, String skill, int votes, String category, String fileName, User user) {
         this.id = id;
         this.recipeName = recipeName;
         this.time = time;
         this.instructions = instructions;
         this.ingredients = ingredients;
         this.skill = skill;
+        this.votes = votes;
+        this.category = category;
         this.fileName = fileName;
         this.user = user;
     }
@@ -80,22 +87,6 @@ public class Recipe {
         return time;
     }
 
-    public String getSkill() {
-        return skill;
-    }
-
-    public void setSkill(String skill) {
-        this.skill = skill;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     public void setTime(int time) {
         this.time = time;
     }
@@ -114,6 +105,38 @@ public class Recipe {
 
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public User getUser() {
