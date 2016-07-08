@@ -1,7 +1,7 @@
 module.exports = function(mix) {
     mix.factory('LoginService', function() {
       let userArr = [];
-      console.log("test login service");
+      console.log();
 
       return {
         // addToPlayerArr: function(player) {
