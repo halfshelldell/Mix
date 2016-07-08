@@ -1,6 +1,5 @@
 package com.theironyard.controllers;
 
-import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -44,13 +43,18 @@ public class MixRestController {
     @PostConstruct
     public void init() throws SQLException, FileNotFoundException {
         Server.createWebServer().start();
-
+        /*User user = new User("Dell", "abc");
+        userRepo.save(user);
+        Recipe recipe = new Recipe("pizza", 60, "pizzapizzapizza", "doughmeatcheese", "easy", 1, "hello", "italian", user);
+        recipeRepo.save(recipe);
+        Fav fav = new Fav(true, user, recipe, recipe.getId());
+        favRepo.save(fav);*/
     }
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
 
-        parseRecipes();
+        //parseRecipes();
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -108,6 +112,116 @@ public class MixRestController {
         recipeRepo.save(recipe);
     }
 
+    @RequestMapping(path = "get-mine", method = RequestMethod.GET)
+    public Iterable<Recipe> getMyRecipes(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return recipeRepo.findByUser(user);
+    }
+
+    @RequestMapping(path = "edit-recipe", method = RequestMethod.POST)
+    public void editRecipe(int id, HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, String filename, String category) throws Exception {
+        Recipe r = recipeRepo.findOne(id);
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        else if (user != r.getUser()){
+            throw new Exception("logged in user and recipe creator do not match");
+        }
+
+        if (category != null) {
+            r.setCategory(category);
+        }
+        if (ingredients != null) {
+            r.setIngredients(ingredients);
+        }
+        if (instructions != null) {
+            r.setInstructions(instructions);
+        }
+        if (recipeName != null) {
+            r.setRecipeName(recipeName);
+        }
+        if (skill != null) {
+            r.setSkill(skill);
+        }
+        if (time != null) {
+            r.setTime(time);
+        }
+        if (file != null){
+            File f = new File("public/files/" + r.getFileName());
+            f.delete();
+
+            File dir = new File("public/files");
+            dir.mkdirs();
+
+            File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+            FileOutputStream fos = new FileOutputStream(uploadedFile);
+            fos.write(file.getBytes());
+
+            r.setFileName(uploadedFile.getName());
+        }
+
+        recipeRepo.save(r);
+    }
+
+    @RequestMapping(path = "/delete-recipe", method = RequestMethod.POST)
+    public void deleteRecipe(HttpSession session, int id) throws Exception {
+        Recipe r = recipeRepo.findOne(id);
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        else if (user != r.getUser()){
+            throw new Exception("logged in user and recipe creator do not match");
+        }
+        recipeRepo.delete(r);
+    }
+
+    @RequestMapping(path = "/favs", method = RequestMethod.POST)
+    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database, try again!");
+        }
+
+        Recipe recipe = recipeRepo.findOne(fav.getRecipeID());
+        if (recipe == null) {
+            throw new Exception("Can't find the recipe");
+        }
+
+        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        recipeRepo.save(recipe);
+
+        fav.setRecipe(recipe);
+        fav.setUser(user);
+        favRepo.save(fav);
+    }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
         File f = new File("Mix-delimited.csv");
@@ -124,3 +238,4 @@ public class MixRestController {
 
 
 }
+

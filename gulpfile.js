@@ -4,7 +4,7 @@ let gulp = require('gulp');
 let sass = require('gulp-sass');
 let browserify = require('gulp-browserify');
 
-gulp.task('default', ['html', 'css', 'js','images']);
+gulp.task('default', ['html', 'css', 'js','images','watch']);
 
 gulp.task('html', function () {
   gulp.src('./templates/*.html').pipe(gulp.dest('./public/templates'));
