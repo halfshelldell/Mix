@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -48,6 +49,9 @@ public class MixRestController {
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
+
+        parseRecipes();
+
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -57,8 +61,6 @@ public class MixRestController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        parseRecipes();
-
 
        return recipeRepo.findAll();
 
@@ -110,10 +112,13 @@ public class MixRestController {
         User user = new User("a", "a");
         File f = new File("Mix-delimited.csv");
         Scanner scanner = new Scanner(f);
+        scanner.nextLine();
         while(scanner.hasNext()){
-            String[] recipeString = scanner.nextLine().split("|");
+            String[] recipeString = scanner.nextLine().split("\\|");
             Recipe recipe1 = new Recipe(recipeString[0],Integer.valueOf(recipeString[1]),recipeString[2],recipeString[3],recipeString[4],Integer.valueOf(recipeString[5]),recipeString[6],recipeString[7], user);
+
             recipeRepo.save(recipe1);
+            System.out.println(" ");
         }
     }
 
