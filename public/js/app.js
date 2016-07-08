@@ -1,13 +1,39 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-let mix = angular.module('MixApp', ['ngRoute']);
+module.exports = function(mix) {
+    mix.controller('LoginController', ['$scope', 'LoginService', '$location', function($scope, LoginService, $location) {
+        $scope.username = "",
+        $scope.userpassword = "",
+
+        $scope.login = function() {
+            console.log("clicked login");
+
+        };
+        // $http({
+        //       // url: '/users',
+        //       method: 'post',
+        //       data: {
+        //           name: $scope.username,
+        //           password: $scope.userpassword,
+        //       },
+        //   }).then(function () {
+        //       $location.path('/mixmatch');
+        //   }).catch(function () {
+        //       console.error('INTRUDER');
+        //       $location.path('/shit')
+        //   });
+
+    }]);
+};
+
+},{}],2:[function(require,module,exports){
+let mix = angular.module('mixApp', ['ngRoute']);
 //
 // // Controllers
-// require('./js/controllers/logincontroller')(mix);
+require('./controllers/logincontroller')(mix);
 // require('./js/controllers/questioncontroller')((mix;
 //
 // // Services
-// require('./js/services/questionservice')(mix);
-// require('./js/services/loginservice')(mix);
+require('./services/loginservice')(mix);
 
 
 mix.config(['$routeProvider', function ($routeProvider) {
@@ -16,7 +42,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             redirectTo: '/login',
         })
         .when('/login', {
-            // controller: 'LoginController',
+            controller: 'LoginController',
             templateUrl: 'templates/login.html',
         })
         .when('/mixmatch', {
@@ -36,4 +62,26 @@ mix.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-},{}]},{},[1])
+},{"./controllers/logincontroller":1,"./services/loginservice":3}],3:[function(require,module,exports){
+module.exports = function(mix) {
+    mix.factory('LoginService', function() {
+      let userArr = [];
+      console.log();
+
+      return {
+        // addToPlayerArr: function(player) {
+        //   playerArr.push(player);
+        // },
+        // // getPlayerArr: function() {
+        // //   return playerArr;
+        // // },
+        // // getPassword: function(){
+        // //   return loginPassword;
+        // // }
+
+      };
+    });
+
+  };
+
+},{}]},{},[2])
