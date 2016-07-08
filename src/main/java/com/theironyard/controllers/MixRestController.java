@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -38,7 +39,7 @@ public class MixRestController {
     FavRepository favRepo;
 
     @PostConstruct
-    public void init() throws SQLException, PasswordStorage.CannotPerformOperationException {
+    public void init() throws SQLException {
         Server.createWebServer().start();
         /*User user = new User("Dell", "abc");
         userRepo.save(user);
