@@ -9,20 +9,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
     <script src="js/app.js"></script>
     <title>Mix</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="#/login">login</a></li>
-            <li><a href="#/rating">rating</a></li>
-            <li><a href="#/create">create</a></li>
-            <li><a href="#/mixmatch">mix n' match</a></li>
-        </ul>
-    </nav>
-    <h1>Test phase</h1>
+  <nav class="navbarnavbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#" class ="menuText">MIX</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#/login" class ="menuText"  >login </a></li>
+        <li><a href="#/rating" class ="menuText"  >rating </a></li>
+        <li><a href="#/create"  class ="menuText" >create </a></li>
+        <li><a href="#/mixmatch"  class ="menuText" >mix n' match </a></li>
+      </ul>
+    </div>
+  </nav>
+  <header>
+    <img src="templates/images/mixlogo.png" class = "logo" style="margin-left: 30%;"/>
+  </header>
+
 
     <main ng-view></main>
 
