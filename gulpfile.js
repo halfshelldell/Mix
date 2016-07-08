@@ -4,7 +4,7 @@ let gulp = require('gulp');
 let sass = require('gulp-sass');
 let browserify = require('gulp-browserify');
 
-gulp.task('default', ['html', 'css', 'js']);
+gulp.task('default', ['html', 'css', 'js','images']);
 
 gulp.task('html', function () {
   gulp.src('./templates/*.html').pipe(gulp.dest('./public/templates'));
@@ -18,6 +18,11 @@ gulp.task('css', function () {
         .pipe(sass())
         .pipe(gulp.dest('./public'));
 });
+
+gulp.task('images',function(){
+  return gulp.src('./templates/images/*.png').pipe(gulp.dest('./public/templates'));
+
+})
 
 gulp.task('js', function () {
   gulp.src('./js/controllers/*.js').pipe(gulp.dest('./public/js/controllers'));
