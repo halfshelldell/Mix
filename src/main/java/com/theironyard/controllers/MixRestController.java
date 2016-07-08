@@ -18,9 +18,12 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * Created by johncrooks on 7/7/16.
@@ -38,8 +41,9 @@ public class MixRestController {
     FavRepository favRepo;
 
     @PostConstruct
-    public void init() throws SQLException {
+    public void init() throws SQLException, FileNotFoundException {
         Server.createWebServer().start();
+
     }
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
@@ -53,6 +57,8 @@ public class MixRestController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
+        parseRecipes();
+
 
        return recipeRepo.findAll();
 
@@ -99,5 +105,17 @@ public class MixRestController {
         Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
     }
+
+    public void parseRecipes() throws FileNotFoundException {
+        User user = new User("a", "a");
+        File f = new File("Mix-delimited.csv");
+        Scanner scanner = new Scanner(f);
+        while(scanner.hasNext()){
+            String[] recipeString = scanner.nextLine().split("|");
+            Recipe recipe1 = new Recipe(recipeString[0],Integer.valueOf(recipeString[1]),recipeString[2],recipeString[3],recipeString[4],Integer.valueOf(recipeString[5]),recipeString[6],recipeString[7], user);
+            recipeRepo.save(recipe1);
+        }
+    }
+
 
 }
