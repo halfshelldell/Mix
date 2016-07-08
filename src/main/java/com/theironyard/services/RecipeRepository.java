@@ -9,4 +9,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
     Iterable<Recipe> findByUser(User user);
+    Recipe findByRecipeName(String name);
 }
