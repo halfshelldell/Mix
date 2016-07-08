@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.Iterator;
 
@@ -72,6 +75,29 @@ public class MixRestController {
     public void logout(HttpSession session, HttpServletResponse response) throws Exception {
         session.invalidate();
         response.sendRedirect("/");
+    }
+
+    @RequestMapping(path = "/create-recipe", method = RequestMethod.POST)
+    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, int time, String instructions, String ingredients, String skill, int votes, String filename, String category) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        File dir = new File("public/files");
+        dir.mkdirs();
+
+        File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+        FileOutputStream fos = new FileOutputStream(uploadedFile);
+        fos.write(file.getBytes());
+
+        Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
+        recipeRepo.save(recipe);
     }
 
 }
