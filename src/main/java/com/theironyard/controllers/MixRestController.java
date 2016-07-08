@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -40,6 +41,12 @@ public class MixRestController {
     @PostConstruct
     public void init() throws SQLException {
         Server.createWebServer().start();
+        /*User user = new User("Dell", "abc");
+        userRepo.save(user);
+        Recipe recipe = new Recipe("pizza", 60, "pizzapizzapizza", "doughmeatcheese", "easy", 1, "hello", "italian", user);
+        recipeRepo.save(recipe);
+        Fav fav = new Fav(true, user, recipe, recipe.getId());
+        favRepo.save(fav);*/
     }
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
@@ -186,4 +193,28 @@ public class MixRestController {
         recipeRepo.delete(r);
     }
 
+    @RequestMapping(path = "/favs", method = RequestMethod.POST)
+    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database, try again!");
+        }
+
+        Recipe recipe = recipeRepo.findOne(fav.getRecipeID());
+        if (recipe == null) {
+            throw new Exception("Can't find the recipe");
+        }
+
+        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        recipeRepo.save(recipe);
+
+        fav.setRecipe(recipe);
+        fav.setUser(user);
+        favRepo.save(fav);
+    }
 }
