@@ -1,12 +1,11 @@
-let mix = angular.module('MixApp', ['ngRoute']);
+let mix = angular.module('mixApp', ['ngRoute']);
 //
 // // Controllers
-// require('./js/controllers/logincontroller')(mix);
+require('./controllers/logincontroller')(mix);
 // require('./js/controllers/questioncontroller')((mix;
 //
 // // Services
-// require('./js/services/questionservice')(mix);
-// require('./js/services/loginservice')(mix);
+require('./services/loginservice')(mix);
 
 
 mix.config(['$routeProvider', function ($routeProvider) {
@@ -15,7 +14,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             redirectTo: '/login',
         })
         .when('/login', {
-            // controller: 'LoginController',
+            controller: 'LoginController',
             templateUrl: 'templates/login.html',
         })
         .when('/mixmatch', {

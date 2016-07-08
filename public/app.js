@@ -30,7 +30,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: './templates/login.html',
+            templateUrl: 'templates/login.html',
         })
         .when('/mixmatch', {
             // controller: '',
