@@ -39,7 +39,7 @@ public class MixRestController {
         Server.createWebServer().start();
     }
 
-    @RequestMapping (path = "/recipes", method = RequestMethod.GET)
+    @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
