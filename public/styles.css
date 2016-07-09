@@ -139,3 +139,17 @@ h1 {
 
 #form-group {
   float: left; }
+
+#createContainer {
+  font-family: 'Amatic SC', cursive;
+  position: relative;
+  left: -6%;
+  top: 52px;
+  width: 60%;
+  height: 625px;
+  /* border: 2px solid red; */
+  background-color: #FCFBE3; }
+
+label {
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px; }
