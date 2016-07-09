@@ -20,7 +20,7 @@ gulp.task('css', function () {
 });
 
 gulp.task('images',function(){
-  return gulp.src('./templates/images/*.png').pipe(gulp.dest('./public/templates'));
+  return gulp.src('./templates/images/*.svg').pipe(gulp.dest('./public/templates'));
 
 })
 
