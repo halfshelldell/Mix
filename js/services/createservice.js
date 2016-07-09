@@ -4,21 +4,22 @@ module.exports = function (mix) {
 
         return {
           // $http({
-                // url: '/recipe????',
+                // url: '/create-recipe',
           //       method: 'post',
                 // data: {
-                //     id:
+                //
                 //     recipeName:
+                      // time:
                 //     instructions:
                 //     ingredients:
                 //     skill:
-                //     fileName:
-                //     user:
+                //     file:
+
                 // },
                 // dataType: 'json',
                 //     contentType: "application/json"
           //   });
-          
+
                 // return user;
             // },
         };
