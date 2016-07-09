@@ -5,20 +5,20 @@
 
         <fieldset class="form-group">
             <label for="Recip">Recipe Name</label>
-            <input type="text" class="form-control" id="" placeholder="Firecracker Sauce">
+            <input ng-model="recipeName" type="text" class="form-control" id="" placeholder="Firecracker Sauce">
         </fieldset>
         <fieldset class="form-group">
             <label for="Time">Recipe Time</label>
-            <input type="text" class="form-control" id="" placeholder="20min">
+            <input ng-model="time" type="text" class="form-control" id="" placeholder="20min">
         </fieldset>
 
         <fieldset class="form-group">
             <label for="ingredients">Ingredients</label>
-            <input type="text" class="form-control" id="" placeholder="Salt, Pepper, Garlic...">
+            <input ng-model="ingredients" type="text" class="form-control" id="" placeholder="Salt, Pepper, Garlic...">
         </fieldset>
         <fieldset class="form-group">
             <label for="instructions">Recipe Instructions</label>
-            <textarea class="form-control" id="" rows="3"></textarea>
+            <textarea ng-model="instructions" class="form-control" id="" rows="3"></textarea>
         </fieldset>
         <fieldset class="form-group">
         <label class="radio-inline">

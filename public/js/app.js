@@ -1,13 +1,31 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function(mix) {
-    mix.controller('CreateController', ['$scope', 'CreateService', '$location', function($scope, CreateService, $location) {
+    mix.controller('CreateController', ['$scope', 'CreateService', '$location', '$http', function($scope, CreateService, $location, $http) {
+            $scope.recipeName = "",
+            $scope.time = 0,
+            $scope.instructions = "",
+            $scope.ingredients = "",
+            $scope.skill = "",
+            $scope.file = "",
 
-        $scope.createRecipe = function() {
-            console.log("clicked create");
+            $scope.createRecipe = function() {
+                console.log("clicked create");
+                $http({
+                    url: '/create-recipe',
+                    method: 'post',
+                    data: {
+                        recipeName: $scope.recipeName,
+                        time: $scope.time,
+                        instructions: $scope.instructions,
+                        ingredients: $scope.ingredients,
+                        skill: $scope.skill,
+                        file: $scope.file,
 
-        };
+                    },
 
+                });
 
+            };
     }]);
 };
 
@@ -86,21 +104,22 @@ module.exports = function (mix) {
 
         return {
           // $http({
-                // url: '/recipe????',
+                // url: '/create-recipe',
           //       method: 'post',
                 // data: {
-                //     id:
+                //
                 //     recipeName:
+                      // time:
                 //     instructions:
                 //     ingredients:
                 //     skill:
-                //     fileName:
-                //     user:
+                //     file:
+
                 // },
                 // dataType: 'json',
                 //     contentType: "application/json"
           //   });
-          
+
                 // return user;
             // },
         };
