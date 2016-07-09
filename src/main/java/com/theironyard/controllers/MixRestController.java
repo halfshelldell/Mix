@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -53,8 +54,6 @@ public class MixRestController {
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
-
-        //parseRecipes();
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
