@@ -55,8 +55,6 @@ public class MixRestController {
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
 
-        //parseRecipes();
-
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
