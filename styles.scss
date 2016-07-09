@@ -42,8 +42,8 @@ top: -114%;
   font-family: 'Amatic SC', cursive;
   color: #D3B18C;
   position: relative;
-  left: -46%;
-  font-size: 58px;
+  left: -49%;
+    font-size: 56px;
   // display: inline-block;
 }
 .knife{
@@ -125,7 +125,7 @@ border: 2px solid brown;
 right: -35%;
 border: 2px solid white;
 width: 24%;
-height: 145px;
+height: 350px;
 background-color: #FCFBE3;
     bottom: -70px;
 }
@@ -142,4 +142,7 @@ h1{
   font-family: 'Amatic SC', cursive;
   color:#D2B08C;
   text-align: center;
+}
+#form-group{
+  float: left;
 }
