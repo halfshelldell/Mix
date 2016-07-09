@@ -100,6 +100,10 @@ public class MixRestController {
             throw new Exception("User not in database!");
         }
 
+        if (!file.getContentType().contains("image")){
+            throw new Exception("only images allowed");
+        }
+
         File dir = new File("public/files");
         dir.mkdirs();
 
@@ -162,6 +166,11 @@ public class MixRestController {
             r.setTime(time);
         }
         if (file != null){
+
+            if (!file.getContentType().contains("image")){
+                throw new Exception("only images allowed");
+            }
+
             File f = new File("public/files/" + r.getFileName());
             f.delete();
 
