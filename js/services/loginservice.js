@@ -16,8 +16,8 @@ module.exports = function (mix) {
           //       console.error('INTRUDER');
           //       $location.path('/shit')
             // });
-                return user;
-            },
+                // return user;
+            // },
         };
     }]);
 };

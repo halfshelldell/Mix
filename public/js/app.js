@@ -9,11 +9,11 @@ module.exports = function(mix) {
 
         };
         // $http({
-        //       // url: '/users',
+              // url: '/users',
         //       method: 'post',
         //       data: {
-        //           name: $scope.username,
-        //           password: $scope.userpassword,
+        //           username: $scope.username,
+        //           password: $scope.password,
         //       },
         //   }).then(function () {
         //       $location.path('/mixmatch');
@@ -24,6 +24,9 @@ module.exports = function(mix) {
 
     }]);
 };
+
+// usera
+// passworda
 
 },{}],2:[function(require,module,exports){
 let mix = angular.module('mixApp', ['ngRoute']);
@@ -54,7 +57,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/rating.html',
         })
         .when('/create', {
-            // controller: '',
+            controller: 'CreateController',
             templateUrl: 'templates/create.html',
         })
         .otherwise({
@@ -63,25 +66,28 @@ mix.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 },{"./controllers/logincontroller":1,"./services/loginservice":3}],3:[function(require,module,exports){
-module.exports = function(mix) {
-    mix.factory('LoginService', function() {
-      let userArr = [];
-      console.log();
+module.exports = function (mix) {
+    mix.factory('LoginService', ['$http', function ($http) {
+        let user = [];
 
-      return {
-        // addToPlayerArr: function(player) {
-        //   playerArr.push(player);
-        // },
-        // // getPlayerArr: function() {
-        // //   return playerArr;
-        // // },
-        // // getPassword: function(){
-        // //   return loginPassword;
-        // // }
-
-      };
-    });
-
-  };
+        return {
+          // $http({
+                // url: '/users',
+          //       method: 'post',
+          //       data: {
+          //           username: $scope.username,
+          //           password: $scope.password,
+          //       },
+          //   }).then(function () {
+          //       $location.path('/mixmatch');
+          //   }).catch(function () {
+          //       console.error('INTRUDER');
+          //       $location.path('/shit')
+            // });
+                // return user;
+            // },
+        };
+    }]);
+};
 
 },{}]},{},[2])

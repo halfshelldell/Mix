@@ -1,7 +1,6 @@
 module.exports = function(mix) {
-    mix.controller('LoginController', ['$scope', 'LoginService', '$location', function($scope, LoginService, $location) {
+    mix.controller('CreateController', ['$scope', 'LoginService', '$location', function($scope, LoginService, $location) {
         $scope.username = "",
-        $scope.userpassword = "",
 
         $scope.login = function() {
             console.log("clicked login");
@@ -23,6 +22,3 @@ module.exports = function(mix) {
 
     }]);
 };
-
-// usera
-// passworda

@@ -26,7 +26,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/rating.html',
         })
         .when('/create', {
-            // controller: '',
+            controller: 'CreateController',
             templateUrl: 'templates/create.html',
         })
         .otherwise({
