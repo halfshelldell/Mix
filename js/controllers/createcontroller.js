@@ -4,7 +4,7 @@ module.exports = function(mix) {
             $scope.time = 0,
             $scope.instructions = "",
             $scope.ingredients = "",
-            $scope.skill = "",
+            $scope.skill = "easy",
             $scope.file = "",
 
             $scope.createRecipe = function() {
