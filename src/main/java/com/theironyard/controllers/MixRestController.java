@@ -100,6 +100,10 @@ public class MixRestController {
             throw new Exception("User not in database!");
         }
 
+        if (!file.getContentType().contains("image")){
+            throw new Exception("only images allowed");
+        }
+
         File dir = new File("public/files");
         dir.mkdirs();
 
@@ -111,7 +115,7 @@ public class MixRestController {
         recipeRepo.save(recipe);
     }
 
-    @RequestMapping(path = "get-mine", method = RequestMethod.GET)
+    @RequestMapping(path = "/get-mine", method = RequestMethod.GET)
     public Iterable<Recipe> getMyRecipes(HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -126,7 +130,7 @@ public class MixRestController {
         return recipeRepo.findByUser(user);
     }
 
-    @RequestMapping(path = "edit-recipe", method = RequestMethod.POST)
+    @RequestMapping(path = "/edit-recipe", method = RequestMethod.POST)
     public void editRecipe(int id, HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, String filename, String category) throws Exception {
         Recipe r = recipeRepo.findOne(id);
 
@@ -162,6 +166,11 @@ public class MixRestController {
             r.setTime(time);
         }
         if (file != null){
+
+            if (!file.getContentType().contains("image")){
+                throw new Exception("only images allowed");
+            }
+
             File f = new File("public/files/" + r.getFileName());
             f.delete();
 
