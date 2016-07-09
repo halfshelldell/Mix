@@ -1,43 +1,51 @@
 <div id = "createContainer"class="col-md-offset-3 col-md-6">
 <h1>START YOUR MIX</h1>
 
-    <form>
-
+    <form method="post" action="/create-recipe" enctype="multipart/form-data">
         <fieldset class="form-group">
-            <label for="Recip">Recipe Name</label>
-            <input type="text" class="form-control" id="" placeholder="Firecracker Sauce">
+            <label for="Recipe">Recipe Name</label>
+            <input type="text" name="recipeName" class="form-control" id="" value="" placeholder="Firecracker Sauce">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="exampleSelect2">Example multiple select</label>
+            <select multiple class="form-control" name="category">
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+
+            </select>
         </fieldset>
         <fieldset class="form-group">
             <label for="Time">Recipe Time</label>
-            <input type="text" class="form-control" id="" placeholder="20min">
+            <input type="number" name="time" class="form-control" id="" placeholder="20min">
         </fieldset>
 
         <fieldset class="form-group">
             <label for="ingredients">Ingredients</label>
-            <input type="text" class="form-control" id="" placeholder="Salt, Pepper, Garlic...">
+            <input type="text" name="ingredients" class="form-control" id="" placeholder="Salt, Pepper, Garlic...">
         </fieldset>
         <fieldset class="form-group">
             <label for="instructions">Recipe Instructions</label>
-            <textarea class="form-control" id="" rows="3"></textarea>
+            <textarea class="form-control" name="instructions" id="" rows="3"></textarea>
         </fieldset>
         <fieldset class="form-group">
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="" value="easy"> Easy
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="" value="medium"> Medium
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="" value="hard"> Hard
-        </label>
-      </fieldset>
+            <label class="radio-inline">
+                <input type="radio" name="skill" id="" value="easy"> Easy
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="skill" id="" value="medium"> Medium
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="skill" id="" value="hard"> Hard
+            </label>
+        </fieldset>
         <fieldset class="form-group">
             <label for="exampleInputFile">Picture input</label>
-            <input type="file" class="form-control-file" id="">
+            <input type="file" name="file" class="form-control-file" id="">
             <small class="text-muted">Select a picture that displays your meal!</small>
         </fieldset>
 
-        <button ng-click="createRecipe()"type="button" class="btn btn-primary">Submit New Recipe</button>
+        <button ng-click='createRecipe()' type="submit" class="btn btn-primary">Submit New Recipe</button>
 
     </form>
 
