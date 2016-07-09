@@ -89,7 +89,7 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/create-recipe", method = RequestMethod.POST)
-    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, int time, String instructions, String ingredients, String skill, int votes, String filename, String category) throws Exception {
+    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, Integer votes, String filename, String category) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
