@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
@@ -112,7 +113,7 @@ public class MixRestController {
         recipeRepo.save(recipe);
     }
 
-    @RequestMapping(path = "get-mine", method = RequestMethod.GET)
+    @RequestMapping(path = "/get-mine", method = RequestMethod.GET)
     public Iterable<Recipe> getMyRecipes(HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -127,7 +128,7 @@ public class MixRestController {
         return recipeRepo.findByUser(user);
     }
 
-    @RequestMapping(path = "edit-recipe", method = RequestMethod.POST)
+    @RequestMapping(path = "/edit-recipe", method = RequestMethod.POST)
     public void editRecipe(int id, HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, String filename, String category) throws Exception {
         Recipe r = recipeRepo.findOne(id);
 
