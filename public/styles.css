@@ -57,3 +57,8 @@ header {
   color: white;
   font-family: 'Amatic SC', cursive;
   font-size: 30px; }
+
+.test-box {
+  height: 300px;
+  border: 1px dashed black;
+  background-color: lightblue; }

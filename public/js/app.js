@@ -71,6 +71,7 @@ module.exports = function (mix) {
         let user = [];
 
         return {
+          postUser: function() {
           // $http({
                 // url: '/users',
           //       method: 'post',
@@ -84,7 +85,8 @@ module.exports = function (mix) {
           //       console.error('INTRUDER');
           //       $location.path('/shit')
             // });
-                // return user;
+          }
+                // return postUser;
             // },
         };
     }]);
