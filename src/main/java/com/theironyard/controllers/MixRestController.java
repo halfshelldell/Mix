@@ -55,8 +55,6 @@ public class MixRestController {
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
     public Iterable<Recipe> home(HttpSession session) throws Exception {
 
-        //parseRecipes();
-
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -100,6 +98,10 @@ public class MixRestController {
         User user = userRepo.findByUsername(username);
         if (user == null) {
             throw new Exception("User not in database!");
+        }
+
+        if (!file.getContentType().contains("image")){
+            throw new Exception("only images allowed");
         }
 
         File dir = new File("public/files");
@@ -164,6 +166,11 @@ public class MixRestController {
             r.setTime(time);
         }
         if (file != null){
+
+            if (!file.getContentType().contains("image")){
+                throw new Exception("only images allowed");
+            }
+
             File f = new File("public/files/" + r.getFileName());
             f.delete();
 

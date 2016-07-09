@@ -2,10 +2,11 @@ let mix = angular.module('mixApp', ['ngRoute']);
 //
 // // Controllers
 require('./controllers/logincontroller')(mix);
-// require('./js/controllers/questioncontroller')((mix;
+require('./controllers/createcontroller')(mix);
 //
 // // Services
 require('./services/loginservice')(mix);
+require('./services/createservice')(mix);
 
 
 mix.config(['$routeProvider', function ($routeProvider) {
@@ -26,7 +27,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/rating.html',
         })
         .when('/create', {
-            // controller: '',
+            controller: 'CreateController',
             templateUrl: 'templates/create.html',
         })
         .otherwise({
