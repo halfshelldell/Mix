@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Fav;
 import com.theironyard.entities.Recipe;
 import com.theironyard.entities.User;
 import com.theironyard.services.FavRepository;
