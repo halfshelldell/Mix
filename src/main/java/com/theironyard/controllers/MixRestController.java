@@ -89,7 +89,7 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/create-recipe", method = RequestMethod.POST)
-    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, Integer votes, String filename, String category) throws Exception {
+    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, Integer votes, String category) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -110,6 +110,29 @@ public class MixRestController {
         File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
+
+        if (recipeName == null){
+            recipeName = "Unknown";
+        }
+        if (time == null){
+            time = 0;
+        }
+        if (ingredients == null){
+            ingredients = "Unknown";
+        }
+        if (instructions == null){
+            instructions = "Unknown";
+        }
+        if (skill == null){
+            skill = "Unknown";
+        }
+        if (category == null){
+            category = "Unknown";
+        }
+
+        if (votes == null) {
+            votes = 0;
+        }
 
         Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
