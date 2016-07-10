@@ -14,5 +14,15 @@ module.exports = function(mix) {
             });
 
         };
+        $scope.delRecipe = function(){
+          $http({
+            url:'/recipes',
+            method: 'delete',
+            data: {
+
+            }
+          });
+
+        };
     }]);
 };
