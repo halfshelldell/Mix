@@ -50,6 +50,7 @@ public class MixRestController {
         recipeRepo.save(recipe);
         Fav fav = new Fav(true, user, recipe, recipe.getId());
         favRepo.save(fav);*/
+        parseRecipes();
     }
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
@@ -241,7 +242,7 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        Recipe recipe = recipeRepo.findOne(fav.getRecipeID());
+        Recipe recipe = recipeRepo.findOne(fav.getRecipe().getId());
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
@@ -255,14 +256,18 @@ public class MixRestController {
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
+        userRepo.save(user);
         File f = new File("Mix-delimited.csv");
         Scanner scanner = new Scanner(f);
         scanner.nextLine();
         while(scanner.hasNext()){
             String[] recipeString = scanner.nextLine().split("\\|");
             Recipe recipe1 = new Recipe(recipeString[0],Integer.valueOf(recipeString[1]),recipeString[2],recipeString[3],recipeString[4],Integer.valueOf(recipeString[5]),recipeString[6],recipeString[7], user);
-
             recipeRepo.save(recipe1);
+
+            Fav fav = new Fav(false, user,recipe1);
+            favRepo.save(fav);
+
             System.out.println(" ");
         }
     }
