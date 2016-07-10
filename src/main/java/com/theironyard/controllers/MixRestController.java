@@ -50,7 +50,7 @@ public class MixRestController {
         recipeRepo.save(recipe);
         Fav fav = new Fav(true, user, recipe, recipe.getId());
         favRepo.save(fav);*/
-        parseRecipes();
+//        parseRecipes();
     }
 
     @RequestMapping (path ="/recipes", method = RequestMethod.GET)
@@ -90,7 +90,7 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/create-recipe", method = RequestMethod.POST)
-    public void createRecipe(HttpSession session, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, Integer votes, String category) throws Exception {
+    public void createRecipe(HttpSession session, HttpServletResponse response, MultipartFile file, String recipeName, Integer time, String instructions, String ingredients, String skill, Integer votes, String category) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -137,6 +137,12 @@ public class MixRestController {
 
         Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
+
+        Fav fav = new Fav(false, user,recipe);
+        favRepo.save(fav);
+
+        response.sendRedirect("/#/rating");
+
     }
 
     @RequestMapping(path = "/get-mine", method = RequestMethod.GET)
@@ -242,33 +248,42 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        Recipe recipe = recipeRepo.findOne(fav.getRecipe().getId());
+        Fav fav1 = favRepo.findOne(fav.getId());
+
+
+        System.out.println(" asfasdfasdf ");
+
+        Recipe recipe = recipeRepo.findOne(fav1.getRecipe().getId());
+
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
 
-        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        recipe.setVotes(recipe.getVotes() + (fav1.getIsFav() ? 1 : -1));
         recipeRepo.save(recipe);
 
-        fav.setRecipe(recipe);
-        fav.setUser(user);
-        favRepo.save(fav);
+        favRepo.save(fav1);
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
-        userRepo.save(user);
-        File f = new File("Mix-delimited.csv");
-        Scanner scanner = new Scanner(f);
-        scanner.nextLine();
-        while(scanner.hasNext()){
-            String[] recipeString = scanner.nextLine().split("\\|");
-            Recipe recipe1 = new Recipe(recipeString[0],Integer.valueOf(recipeString[1]),recipeString[2],recipeString[3],recipeString[4],Integer.valueOf(recipeString[5]),recipeString[6],recipeString[7], user);
-            recipeRepo.save(recipe1);
+        if(!userRepo.findByUsername(user.getUsername()).equals("a")){
+            userRepo.save(user);
+        }else{
 
-            Fav fav = new Fav(false, user,recipe1);
-            favRepo.save(fav);
+            File f = new File("Mix-delimited.csv");
+            Scanner scanner = new Scanner(f);
+            scanner.nextLine();
+            while(scanner.hasNext()) {
+                String[] recipeString = scanner.nextLine().split("\\|");
+                Recipe recipe1 = new Recipe(recipeString[0], Integer.valueOf(recipeString[1]), recipeString[2], recipeString[3], recipeString[4], Integer.valueOf(recipeString[5]), recipeString[6], recipeString[7], user);
+                recipeRepo.save(recipe1);
 
-            System.out.println(" ");
+                Fav fav = new Fav(false, user, recipe1);
+                favRepo.save(fav);
+
+                System.out.println(" ");
+            }
+
         }
     }
 
