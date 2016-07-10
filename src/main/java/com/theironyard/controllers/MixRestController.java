@@ -253,8 +253,8 @@ public class MixRestController {
 
         System.out.println(" asfasdfasdf ");
 
-        Recipe recipe = recipeRepo.findOne(fav1.getRecipeId());
-        fav1.setIsFav(fav.getIsFav());
+        Recipe recipe = recipeRepo.findOne(fav1.getRecipe().getId());
+
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
@@ -263,9 +263,8 @@ public class MixRestController {
         recipeRepo.save(recipe);
 
 
-//        fav.setRecipe(recipe);
-//        fav.setUser(user);
-//        favRepo.save(fav);
+
+        favRepo.save(fav1);
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
