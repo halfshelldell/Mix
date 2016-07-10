@@ -61,9 +61,8 @@ module.exports = function(mix) {
 
 },{}],3:[function(require,module,exports){
 module.exports = function(mix) {
-    mix.controller('RatingController', ['$scope', 'RatingService', 'LoginService', '$location', '$http', function($scope, RatingService, LoginService, $location, $http) {
+    mix.controller('RatingController', ['$scope', 'RatingService', '$location', '$http', function($scope, RatingService, $location, $http) {
         $scope.recipes = RatingService.getRecipes(),
-        $scope.user = LoginService.getUser(),
 
         $scope.rateRecipe = function(recipe, vote) {
             console.log("clicked rating", vote, recipe);
@@ -72,7 +71,7 @@ module.exports = function(mix) {
                 method: 'post',
                 data: {
                     id: recipe.id,
-                    votes: vote,
+                    fav: vote,
                 }
             });
 
@@ -160,17 +159,17 @@ module.exports = function(mix) {
         let user = [];
 
         return {
-            getUser: function() {
-                $http({
-                    url: '/login',
-                    method: 'get'
-                }).then(function(results) {
-                    console.table(results.data);
-                    angular.copy(results.data, user)
-                });
+            // getUser: function() {
+            //     $http({
+            //         url: '/login',
+            //         method: 'get'
+            //     }).then(function(results) {
+            //         console.table(results.data);
+            //         angular.copy(results.data, j)
+            //     });
 
-                return user;
-            },
+
+            // },
         };
     }]);
 };

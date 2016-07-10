@@ -3,17 +3,17 @@ module.exports = function(mix) {
         let user = [];
 
         return {
-            getUser: function() {
-                $http({
-                    url: '/login',
-                    method: 'get'
-                }).then(function(results) {
-                    console.table(results.data);
-                    angular.copy(results.data, user)
-                });
+            // getUser: function() {
+            //     $http({
+            //         url: '/login',
+            //         method: 'get'
+            //     }).then(function(results) {
+            //         console.table(results.data);
+            //         angular.copy(results.data, j)
+            //     });
 
-                return user;
-            },
+
+            // },
         };
     }]);
 };

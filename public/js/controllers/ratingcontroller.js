@@ -1,7 +1,6 @@
 module.exports = function(mix) {
-    mix.controller('RatingController', ['$scope', 'RatingService', 'LoginService', '$location', '$http', function($scope, RatingService, LoginService, $location, $http) {
+    mix.controller('RatingController', ['$scope', 'RatingService', '$location', '$http', function($scope, RatingService, $location, $http) {
         $scope.recipes = RatingService.getRecipes(),
-        $scope.user = LoginService.getUser(),
 
         $scope.rateRecipe = function(recipe, vote) {
             console.log("clicked rating", vote, recipe);
@@ -10,7 +9,7 @@ module.exports = function(mix) {
                 method: 'post',
                 data: {
                     id: recipe.id,
-                    votes: vote,
+                    fav: vote,
                 }
             });
 
