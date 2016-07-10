@@ -50,7 +50,7 @@ module.exports = function(mix) {
                   console.error('INTRUDER');
                   $location.path('/shit')
               });
-
+              angular.copy($scope.username, saveUser)
         };
 
     }]);
@@ -88,8 +88,23 @@ module.exports = function(mix) {
           });
 
         };
+        // $scope.editlRecipe = function(recipe){
+        //   console.log("delete clicked");
+        //   $http({
+        //     url: '/edit-recipe',
+        //     method: 'post',
+        //     data: {
+        //       id: recipe.id,
+        //     }
+        //
+        //   });
+        //
+        // };
     }]);
 };
+
+
+// url: '/edit-recipe'
 
 },{}],4:[function(require,module,exports){
 let mix = angular.module('mixApp', ['ngRoute']);

@@ -26,5 +26,20 @@ module.exports = function(mix) {
           });
 
         };
+        // $scope.editlRecipe = function(recipe){
+        //   console.log("delete clicked");
+        //   $http({
+        //     url: '/edit-recipe',
+        //     method: 'post',
+        //     data: {
+        //       id: recipe.id,
+        //     }
+        //
+        //   });
+        //
+        // };
     }]);
 };
+
+
+// url: '/edit-recipe'

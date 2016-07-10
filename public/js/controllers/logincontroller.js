@@ -18,7 +18,7 @@ module.exports = function(mix) {
                   console.error('INTRUDER');
                   $location.path('/shit')
               });
-
+              angular.copy($scope.username, saveUser)
         };
 
     }]);
