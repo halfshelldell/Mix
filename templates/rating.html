@@ -12,7 +12,11 @@
     <h5>Votes: {{recipe.votes}}</h5>
     <button ng-click= "rateRecipe(recipe, true)" class="btn btn-primary" type="button" name="button">UpVote</button>
     <button ng-click= "rateRecipe(recipe, false)" class="btn btn-primary" type="button" name="button">DownVote</button>
+    <div class="" ng-if= "{{recipe.user.username}} === {{recipe.user.username}}">
+      <button ng-click= "deleteRecipe" class="btn btn-primary" type="button" name="button">Delete</button>
+      <button ng-click= "editRecipe" class="btn btn-primary" type="button" name="button">Edit</button>
 
+    </div>
   </div>
 
 </div>
