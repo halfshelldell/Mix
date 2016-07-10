@@ -14,11 +14,14 @@ module.exports = function(mix) {
             });
 
         };
-        $scope.delRecipe = function(){
-          console.log("delete");
+        $scope.delRecipe = function(recipe){
+          console.log("delete clicked");
           $http({
-            url:'/recipes',
-            method: 'delete',
+            url: '/delete-recipe',
+            method: 'post',
+            data: {
+              id: recipe.id,
+            }
 
           });
 
