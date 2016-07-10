@@ -138,8 +138,8 @@ public class MixRestController {
         Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
 
-//        Fav fav = new Fav(false, user,recipe);
-//        favRepo.save(fav);
+        Fav fav = new Fav(false, user,recipe);
+        favRepo.save(fav);
 
         response.sendRedirect("/#/rating");
 
@@ -261,8 +261,6 @@ public class MixRestController {
 
         recipe.setVotes(recipe.getVotes() + (fav1.getIsFav() ? 1 : -1));
         recipeRepo.save(recipe);
-
-
 
         favRepo.save(fav1);
     }
