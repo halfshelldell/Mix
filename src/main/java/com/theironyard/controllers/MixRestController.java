@@ -248,21 +248,21 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        Fav fav1 = favRepo.findOne(fav.getId());
+        //Fav fav1 = favRepo.findOne(fav.getId());
 
 
         System.out.println(" asfasdfasdf ");
 
-        Recipe recipe = recipeRepo.findOne(fav1.getRecipe().getId());
+        Recipe recipe = recipeRepo.findOne(fav.getRecipeId());
 
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
 
-        recipe.setVotes(recipe.getVotes() + (fav1.getIsFav() ? 1 : -1));
-        recipeRepo.save(recipe);
-
-        favRepo.save(fav1);
+        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        fav.setRecipe(recipe);
+        fav.setUser(user);
+        favRepo.save(fav);
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
