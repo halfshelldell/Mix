@@ -8,13 +8,14 @@ module.exports = function(mix) {
                 url: '/favs',
                 method: 'post',
                 data: {
-                    d: recipe.id,
-                    fav: vote,
+                  recipeId: recipe.id,
+                  isFav: vote,
                 }
             });
 
         };
         $scope.delRecipe = function(){
+          console.log("delete");
           $http({
             url:'/recipes',
             method: 'delete',

@@ -70,19 +70,18 @@ module.exports = function(mix) {
                 url: '/favs',
                 method: 'post',
                 data: {
-                    recipeId: recipe.id,
-                    isFav: vote,
+                  recipeId: recipe.id,
+                  isFav: vote,
                 }
             });
 
         };
         $scope.delRecipe = function(){
+          console.log("delete");
           $http({
             url:'/recipes',
             method: 'delete',
-            data: {
 
-            }
           });
 
         };

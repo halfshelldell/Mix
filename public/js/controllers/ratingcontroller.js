@@ -8,19 +8,18 @@ module.exports = function(mix) {
                 url: '/favs',
                 method: 'post',
                 data: {
-                    id: recipe.id,
-                    fav: vote,
+                  recipeId: recipe.id,
+                  isFav: vote,
                 }
             });
 
         };
         $scope.delRecipe = function(){
+          console.log("delete");
           $http({
             url:'/recipes',
             method: 'delete',
-            data: {
 
-            }
           });
 
         };
