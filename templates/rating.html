@@ -1,7 +1,18 @@
 <h1>rating page</h1>
 <div class="row">
-  <div class="col-md-4 test-box"></div>
-  <div class="col-md-4 test-box"></div>
-  <div class="col-md-4 test-box"></div>
-  <div class="col-md-4 test-box"></div>
+  <div ng-repeat= "recipe in recipes" class="col-md-4 test-box">
+
+    <h2>{{recipe.recipeName}}</h2>
+    <h2>{{recipe.user.username}}</h2>
+    <h4>Category: {{recipe.category}}</h4>
+    <h4>Time: {{recipe.time}} minutes</h4>
+    <div class="picture-container">
+      <img ng-src= "files/{{recipe.fileName}}" alt="food pic" />
+    </div>
+    <h5>Votes: {{recipe.votes}}</h5>
+    <button ng-click= "rateRecipe(recipe, true)" class="btn btn-primary" type="button" name="button">UpVote</button>
+    <button ng-click= "rateRecipe(recipe, false)" class="btn btn-primary" type="button" name="button">DownVote</button>
+
+  </div>
+
 </div>
