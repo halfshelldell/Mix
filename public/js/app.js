@@ -62,16 +62,16 @@ module.exports = function(mix) {
 },{}],3:[function(require,module,exports){
 module.exports = function(mix) {
     mix.controller('RatingController', ['$scope', 'RatingService', '$location', '$http', function($scope, RatingService, $location, $http) {
-        $scope.recipes = RatingService.getRecipes()
+        $scope.recipes = RatingService.getRecipes(),
 
         $scope.rateRecipe = function(recipe, vote) {
-            console.log("clicked rating", vote, recipe.id);
+            console.log("clicked rating", vote, recipe);
             $http({
                 url: '/favs',
                 method: 'post',
                 data: {
                     id: recipe.id,
-                    votes: vote,
+                    fav: vote,
                 }
             });
 
@@ -154,27 +154,21 @@ module.exports = function (mix) {
 // Recipe Object…. int id, String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user
 
 },{}],6:[function(require,module,exports){
-module.exports = function (mix) {
-    mix.factory('LoginService', ['$http', function ($http) {
+module.exports = function(mix) {
+    mix.factory('LoginService', ['$http', function($http) {
         let user = [];
 
         return {
-          postUser: function() {
-          // $http({
-                // url: '/users',
-          //       method: 'post',
-          //       data: {
-          //           username: $scope.username,
-          //           password: $scope.password,
-          //       },
-          //   }).then(function () {
-          //       $location.path('/mixmatch');
-          //   }).catch(function () {
-          //       console.error('INTRUDER');
-          //       $location.path('/shit')
-            // });
-          }
-                // return postUser;
+            // getUser: function() {
+            //     $http({
+            //         url: '/login',
+            //         method: 'get'
+            //     }).then(function(results) {
+            //         console.table(results.data);
+            //         angular.copy(results.data, j)
+            //     });
+
+
             // },
         };
     }]);
