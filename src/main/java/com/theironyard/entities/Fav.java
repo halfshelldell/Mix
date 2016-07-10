@@ -18,10 +18,13 @@ public class Fav {
     int id;
 
     @Column (nullable = false)
-    boolean isFav;
+    Boolean isFav;
 
     @ManyToOne
     User user;
+
+    @Transient
+    Integer recipeId;
 
     @ManyToOne
     Recipe recipe;
@@ -31,17 +34,26 @@ public class Fav {
     public Fav() {
     }
 
-    public Fav(int id, boolean isFav, User user, Recipe recipe) {
+    public Fav(Boolean isFav, User user, Recipe recipe) {
+        this.isFav = isFav;
+        this.user = user;
+        this.recipe = recipe;
+    }
+
+    public Fav(int id, Boolean isFav, User user, Recipe recipe) {
         this.id = id;
         this.isFav = isFav;
         this.user = user;
         this.recipe = recipe;
     }
 
-    public Fav(boolean isFav, User user, Recipe recipe) {
-        this.isFav = isFav;
-        this.user = user;
-        this.recipe = recipe;
+
+    public Integer getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Integer recipeId) {
+        this.recipeId = recipeId;
     }
 
     public int getId() {
@@ -52,11 +64,11 @@ public class Fav {
         this.id = id;
     }
 
-    public boolean getIsFav() {
+    public Boolean getIsFav() {
         return isFav;
     }
 
-    public void setIsFav(boolean isFav) {
+    public void setIsFav(Boolean isFav) {
         this.isFav = isFav;
     }
 

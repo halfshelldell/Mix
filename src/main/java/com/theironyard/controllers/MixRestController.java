@@ -138,6 +138,9 @@ public class MixRestController {
         Recipe recipe = new Recipe(recipeName, time, instructions, ingredients, skill, votes, category, uploadedFile.getName(), user);
         recipeRepo.save(recipe);
 
+//        Fav fav = new Fav(false, user,recipe);
+//        favRepo.save(fav);
+
         response.sendRedirect("/#/rating");
 
     }
@@ -245,17 +248,24 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        Recipe recipe = recipeRepo.findOne(fav.getRecipe().getId());
+        Fav fav1 = favRepo.findOne(fav.getId());
+
+
+        System.out.println(" asfasdfasdf ");
+
+        Recipe recipe = recipeRepo.findOne(fav1.getRecipeId());
+        fav1.setIsFav(fav.getIsFav());
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
 
-        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        recipe.setVotes(recipe.getVotes() + (fav1.getIsFav() ? 1 : -1));
         recipeRepo.save(recipe);
 
-        fav.setRecipe(recipe);
-        fav.setUser(user);
-        favRepo.save(fav);
+
+//        fav.setRecipe(recipe);
+//        fav.setUser(user);
+//        favRepo.save(fav);
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
