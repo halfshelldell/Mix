@@ -60,15 +60,37 @@ module.exports = function(mix) {
 // passworda
 
 },{}],3:[function(require,module,exports){
+module.exports = function(mix) {
+    mix.controller('RatingController', ['$scope', 'RatingService', '$location', '$http', function($scope, RatingService, $location, $http) {
+        $scope.recipes = RatingService.getRecipes(),
+
+        $scope.rateRecipe = function(recipe, vote) {
+            console.log("clicked rating", vote, recipe);
+            $http({
+                url: '/favs',
+                method: 'post',
+                data: {
+                    recipeId: recipe.id,
+                    isFav: vote,
+                }
+            });
+
+        };
+    }]);
+};
+
+},{}],4:[function(require,module,exports){
 let mix = angular.module('mixApp', ['ngRoute']);
 //
 // // Controllers
 require('./controllers/logincontroller')(mix);
 require('./controllers/createcontroller')(mix);
+require('./controllers/ratingcontroller')(mix);
 //
 // // Services
 require('./services/loginservice')(mix);
 require('./services/createservice')(mix);
+require('./services/ratingservice')(mix);
 
 
 mix.config(['$routeProvider', function ($routeProvider) {
@@ -85,7 +107,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/mixmatch.html',
         })
         .when('/rating', {
-            controller: '',
+            controller: 'RatingController',
             templateUrl: 'templates/rating.html',
         })
         .when('/create', {
@@ -97,7 +119,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-},{"./controllers/createcontroller":1,"./controllers/logincontroller":2,"./services/createservice":4,"./services/loginservice":5}],4:[function(require,module,exports){
+},{"./controllers/createcontroller":1,"./controllers/logincontroller":2,"./controllers/ratingcontroller":3,"./services/createservice":5,"./services/loginservice":6,"./services/ratingservice":7}],5:[function(require,module,exports){
 module.exports = function (mix) {
     mix.factory('CreateService', ['$http', function ($http) {
         let newrecipe = [];
@@ -131,31 +153,46 @@ module.exports = function (mix) {
 
 // Recipe Object…. int id, String recipeName, int time, String instructions, String ingredients, String skill, String fileName, User user
 
-},{}],5:[function(require,module,exports){
-module.exports = function (mix) {
-    mix.factory('LoginService', ['$http', function ($http) {
+},{}],6:[function(require,module,exports){
+module.exports = function(mix) {
+    mix.factory('LoginService', ['$http', function($http) {
         let user = [];
 
         return {
-          postUser: function() {
-          // $http({
-                // url: '/users',
-          //       method: 'post',
-          //       data: {
-          //           username: $scope.username,
-          //           password: $scope.password,
-          //       },
-          //   }).then(function () {
-          //       $location.path('/mixmatch');
-          //   }).catch(function () {
-          //       console.error('INTRUDER');
-          //       $location.path('/shit')
-            // });
-          }
-                // return postUser;
+            // getUser: function() {
+            //     $http({
+            //         url: '/login',
+            //         method: 'get'
+            //     }).then(function(results) {
+            //         console.table(results.data);
+            //         angular.copy(results.data, j)
+            //     });
+
+
             // },
         };
     }]);
 };
 
-},{}]},{},[3])
+},{}],7:[function(require,module,exports){
+module.exports = function (mix) {
+    mix.factory('RatingService', ['$http', function ($http) {
+        let recipes = [];
+
+        return {
+            getRecipes: function () {
+                $http({
+                    url: '/recipes',
+                    method: 'get'
+                }).then(function (results) {
+                  console.table(results.data);
+                    angular.copy(results.data, recipes)
+                });
+
+                return recipes;
+            },
+        };
+    }]);
+};
+
+},{}]},{},[4])
