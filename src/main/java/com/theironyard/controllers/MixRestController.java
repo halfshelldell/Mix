@@ -233,6 +233,9 @@ public class MixRestController {
         else if (user != r.getUser()){
             throw new Exception("logged in user and recipe creator do not match");
         }
+
+        File f = new File("public/files/" + r.getFileName());
+        f.delete();
         recipeRepo.delete(r);
     }
 
@@ -248,10 +251,6 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        //Fav fav1 = favRepo.findOne(fav.getId());
-
-
-        System.out.println(" asfasdfasdf ");
 
         Recipe recipe = recipeRepo.findOne(fav.getRecipeId());
 
