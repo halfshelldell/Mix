@@ -73,7 +73,6 @@ module.exports = function(mix) {
                   isFav: vote,
                 }
             });
-            $scope.$apply();
         };
         $scope.delRecipe = function(recipe){
           console.log("delete clicked");
@@ -87,7 +86,7 @@ module.exports = function(mix) {
           });
 
         };
-        // $scope.editlRecipe = function(recipe){
+        // $scope.editRecipe = function(recipe){
         //   console.log("delete clicked");
         //   $http({
         //     url: '/edit-recipe',
@@ -129,7 +128,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/login.html',
         })
         .when('/mixmatch', {
-            // controller: '',
+            controller: 'RatingController',
             templateUrl: 'templates/mixmatch.html',
         })
         .when('/rating', {
