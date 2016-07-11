@@ -19,6 +19,7 @@ module.exports = function(mix) {
             url: '/delete-recipe',
             method: 'post',
             data: {
+              user:recipe.user.username,
               recipeId: recipe.id,
             }
 
