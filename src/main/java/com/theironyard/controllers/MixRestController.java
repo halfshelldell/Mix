@@ -236,6 +236,7 @@ public class MixRestController {
 
         File f = new File("public/files/" + r.getFileName());
         f.delete();
+        favRepo.delete(favRepo.findByRecipe(r));
         recipeRepo.delete(r);
     }
 
