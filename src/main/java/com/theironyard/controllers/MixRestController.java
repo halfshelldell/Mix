@@ -218,8 +218,8 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/delete-recipe", method = RequestMethod.POST)
-    public void deleteRecipe(HttpSession session, int id) throws Exception {
-        Recipe r = recipeRepo.findOne(id);
+    public void deleteRecipe(HttpSession session, @RequestBody Recipe recipe) throws Exception {
+        Recipe r = recipeRepo.findOne(recipe.getId());
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
