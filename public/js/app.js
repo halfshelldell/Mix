@@ -80,8 +80,8 @@ module.exports = function(mix) {
             url: '/delete-recipe',
             method: 'post',
             data: {
-              id: recipe.id,
-              user: recipe.user,
+              user:recipe.user.username,
+              recipeId: recipe.id,
             }
 
           });
