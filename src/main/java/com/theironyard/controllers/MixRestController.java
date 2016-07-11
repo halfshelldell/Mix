@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -218,15 +219,17 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/delete-recipe", method = RequestMethod.POST)
-    public void deleteRecipe(HttpSession session, @RequestBody Recipe recipe) throws Exception {
+    public void deleteRecipe(HttpSession session, @RequestBody Recipe recipe, HttpServletResponse response) throws Exception {
         Recipe r = recipeRepo.findOne(recipe.getId());
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
         }
+        System.out.println("fuck");
 
         User user = userRepo.findByUsername(username);
+
         if (user == null) {
             throw new Exception("User not in database!");
         }
@@ -236,12 +239,17 @@ public class MixRestController {
 
         File f = new File("public/files/" + r.getFileName());
         f.delete();
-        favRepo.delete(favRepo.findByRecipe(r));
+        Iterable<Fav> favs = (Iterable<Fav>) favRepo.findByRecipe(r);
+        for (Fav fav : favs) {
+            favRepo.delete(fav);
+        }
         recipeRepo.delete(r);
+        System.out.println("Shit");
+        response.sendRedirect("/#/delete-recipe");
     }
 
     @RequestMapping(path = "/favs", method = RequestMethod.POST)
-    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav) throws Exception {
+    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav, HttpServletResponse response) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -263,6 +271,7 @@ public class MixRestController {
         fav.setRecipe(recipe);
         fav.setUser(user);
         favRepo.save(fav);
+        response.sendRedirect("/#/favs");
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
