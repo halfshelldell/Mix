@@ -56,8 +56,10 @@ header {
     left: -8%;
 }
 .chef1 {
+  text-align: center;
     width: 30%;
-    border: 2px red solid;
+    // border: 2px red solid;
+    background-color: lightblue;
     float: left;
     height: 400px;
     display: inline-block;
@@ -597,7 +599,7 @@ label {
         border: 1px solid black;
     }
     .picture-container img {
-        max-width: 50px;
-        max-height: 50px;
+        max-width: 100px;
+        max-height: 100px;
     }
 }
