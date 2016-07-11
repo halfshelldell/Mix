@@ -12,7 +12,7 @@ module.exports = function(mix) {
                   isFav: vote,
                 }
             });
-
+            $scope.$apply();
         };
         $scope.delRecipe = function(recipe){
           console.log("delete clicked");

@@ -50,7 +50,6 @@ module.exports = function(mix) {
                   console.error('INTRUDER');
                   $location.path('/shit')
               });
-              angular.copy($scope.username, saveUser)
         };
 
     }]);
@@ -74,7 +73,7 @@ module.exports = function(mix) {
                   isFav: vote,
                 }
             });
-
+            $scope.$apply();
         };
         $scope.delRecipe = function(recipe){
           console.log("delete clicked");

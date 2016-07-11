@@ -12,7 +12,6 @@ module.exports = function(mix) {
                   isFav: vote,
                 }
             });
-
         };
         $scope.delRecipe = function(recipe){
           console.log("delete clicked");
@@ -26,7 +25,7 @@ module.exports = function(mix) {
           });
 
         };
-        // $scope.editlRecipe = function(recipe){
+        // $scope.editRecipe = function(recipe){
         //   console.log("delete clicked");
         //   $http({
         //     url: '/edit-recipe',
