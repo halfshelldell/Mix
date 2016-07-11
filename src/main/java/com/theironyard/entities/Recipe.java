@@ -146,4 +146,5 @@ public class Recipe {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
