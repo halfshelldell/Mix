@@ -81,6 +81,7 @@ module.exports = function(mix) {
             method: 'post',
             data: {
               id: recipe.id,
+              user: recipe.user,
             }
 
           });
