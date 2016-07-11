@@ -8,11 +8,37 @@ module.exports = function(mix) {
                 url: '/favs',
                 method: 'post',
                 data: {
-                    id: recipe.id,
-                    fav: vote,
+                  recipeId: recipe.id,
+                  isFav: vote,
                 }
             });
+        };
+        $scope.delRecipe = function(recipe){
+          console.log("delete clicked");
+          $http({
+            url: '/delete-recipe',
+            method: 'post',
+            data: {
+              id: recipe.id,
+            }
+
+          });
 
         };
+        // $scope.editRecipe = function(recipe){
+        //   console.log("delete clicked");
+        //   $http({
+        //     url: '/edit-recipe',
+        //     method: 'post',
+        //     data: {
+        //       id: recipe.id,
+        //     }
+        //
+        //   });
+        //
+        // };
     }]);
 };
+
+
+// url: '/edit-recipe'
