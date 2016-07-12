@@ -24,6 +24,11 @@ gulp.task('images',function(){
 
 })
 
+// gulp.task('jpg',function(){
+//   return gulp.src('./templates/images/*.jpg').pipe(gulp.dest('./public/templates'));
+//
+// })
+
 gulp.task('js', function () {
   gulp.src('./js/controllers/*.js').pipe(gulp.dest('./public/js/controllers'));
   gulp.src('./js/services/*.js').pipe(gulp.dest('./public/js/services'));

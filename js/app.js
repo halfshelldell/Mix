@@ -21,7 +21,7 @@ mix.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/login.html',
         })
         .when('/mixmatch', {
-            // controller: '',
+            controller: 'RatingController',
             templateUrl: 'templates/mixmatch.html',
         })
         .when('/rating', {

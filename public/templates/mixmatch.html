@@ -1,32 +1,45 @@
-
-
 <div class="container">
 
 </div>
 
 <div class="topCatagory">
-  <div class="topChef">
-    <div class="chef1"></div>
-    <div class="chef2"></div>
-    <div class="chef3"></div>
-
-  </div>
-  <div class="topBrews">
-    <div class="andMatch">
-      <div class="spoon">
-        <img src="templates/images/spoon.svg" class = "spoon" style="width: 25%;"/>
-      </div>
-      <h1 class = "matchFont">
+    <div class="topChef">
+        <div ng-repeat="recipe in recipes | orderBy: '-category' | limitTo: 3 " class="chef1">
+          <h1>Recipe: {{recipe.recipeName}}</h1>
+          <h3>Creater: {{recipe.user.username}}</h3>
+          <h3>Category: {{recipe.category}}</h3>
+          <h3>Votes: {{recipe.votes}}</h3>
+          <div class="picture-container">
+            <img ng-src="files/{{recipe.fileName}}" alt="" />
+          </div>
+            <!-- <div class="chef2"></div>
+    <div class="chef3"></div> -->
+        </div>
+    </div>
+    <div class="topBrews">
+        <div class="andMatch">
+            <div class="spoon">
+                <img src="templates/images/spoon.svg" class="spoon" style="width: 25%;" />
+            </div>
+            <h1 class="matchFont">
         N'MATCH
       </h1>
-      <div class="knife">
-        <img src="templates/images/knife.svg"/>
-      </div>
-    </div>
-    <div class="chef1"></div>
-    <div class="chef2"></div>
-    <div class="chef3"></div>
+            <div class="knife">
+                <img src="templates/images/knife.svg" />
+            </div>
+        </div>
+        <div ng-repeat="recipe in recipes | orderBy: '-votes' | limitTo: 3 " class="chef1">
+          <h1>Recipe: {{recipe.recipeName}}</h1>
+          <h3>Creater: {{recipe.user.username}}</h3>
+          <h3>Category: {{recipe.category}}</h3>
+          <h3>Votes: {{recipe.votes}}</h3>
+          <div class="picture-container">
+            <img ng-src="files/{{recipe.fileName}}" alt="" />
+          </div>
+        </div>
+        <!-- <div class="chef1"></div>
+        <div class="chef2"></div>
+        <div class="chef3"></div> -->
 
-  </div>
-  
+    </div>
 </div>

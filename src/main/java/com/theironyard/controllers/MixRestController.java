@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -218,26 +219,37 @@ public class MixRestController {
     }
 
     @RequestMapping(path = "/delete-recipe", method = RequestMethod.POST)
-    public void deleteRecipe(HttpSession session, int id) throws Exception {
-        Recipe r = recipeRepo.findOne(id);
+    public void deleteRecipe(HttpSession session, @RequestBody Recipe recipe, HttpServletResponse response) throws Exception {
+        Recipe r = recipeRepo.findOne(recipe.getId());
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
         }
+        System.out.println("fuck");
 
         User user = userRepo.findByUsername(username);
+
         if (user == null) {
             throw new Exception("User not in database!");
         }
         else if (user != r.getUser()){
             throw new Exception("logged in user and recipe creator do not match");
         }
+
+        File f = new File("public/files/" + r.getFileName());
+        f.delete();
+        Iterable<Fav> favs = (Iterable<Fav>) favRepo.findByRecipe(r);
+        for (Fav fav : favs) {
+            favRepo.delete(fav);
+        }
         recipeRepo.delete(r);
+        System.out.println("Shit");
+        response.sendRedirect("/#/delete-recipe");
     }
 
     @RequestMapping(path = "/favs", method = RequestMethod.POST)
-    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav) throws Exception {
+    public void favoriteRecipe(HttpSession session, @RequestBody Fav fav, HttpServletResponse response) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -248,21 +260,18 @@ public class MixRestController {
             throw new Exception("User not in database, try again!");
         }
 
-        Fav fav1 = favRepo.findOne(fav.getId());
 
-
-        System.out.println(" asfasdfasdf ");
-
-        Recipe recipe = recipeRepo.findOne(fav1.getRecipe().getId());
+        Recipe recipe = recipeRepo.findOne(fav.getRecipeId());
 
         if (recipe == null) {
             throw new Exception("Can't find the recipe");
         }
 
-        recipe.setVotes(recipe.getVotes() + (fav1.getIsFav() ? 1 : -1));
-        recipeRepo.save(recipe);
-
-        favRepo.save(fav1);
+        recipe.setVotes(recipe.getVotes() + (fav.getIsFav() ? 1 : -1));
+        fav.setRecipe(recipe);
+        fav.setUser(user);
+        favRepo.save(fav);
+        response.sendRedirect("/#/favs");
     }
     public void parseRecipes() throws FileNotFoundException {
         User user = new User("a", "a");
